@@ -1,0 +1,38 @@
+<div style="background-color: blueviolet; margin-bottom: 30px; height: 80px;">
+    <h1 style="margin-left: 500px;">
+      List Of Employees
+    </h1>
+  </div>
+  <div style="margin-left: 510px;">
+   <input type="text" name="Search" placeholder="Search employee" (keypress) = "searchValue($event)" >
+   <button style="margin-left: 10px;">Search</button>
+  </div>
+  <div>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Employee</th>
+        <th scope="col">Designation</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let User of userList; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ User.name }}</td>
+        <td>{{ User.desig }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
