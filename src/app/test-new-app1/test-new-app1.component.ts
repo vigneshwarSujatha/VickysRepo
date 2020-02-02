@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Input} from '@angular/core';
+import {HttpServiceService} from '../http-service.service'
 
 @Component({
   selector: 'app-test-new-app1',
@@ -6,33 +7,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./test-new-app1.component.css']
 })
 export class TestNewApp1Component implements OnInit {
-  
   userList = [];
-  constructor() { }
+  constructor(public httpService: HttpServiceService) { }
 
   ngOnInit() {
-    this.userList = [{
-      name: 'Vicky',
-      desig: 'SE'
-    },
-    {
-      name: 'Vimal',
-      desig :'TL'
-    },
-    {
-      name: 'Madhu',
-      desig : 'Manager'
-    },
-    {
-      name: 'selvam',
-      desig : 'TL'
-    }
-  ]
+    this.httpService.getApi('getAllEmployee').subscribe(res => {
+      this.userList = res['data'];
+    });
   }
 
   searchValue(event) {
-    console.log(event.target.value);
-    
+    if(event.target.value.length > 0){
+      this.httpService.getApi('findEmployee/'+event.target.value).subscribe(res => {
+        this.userList = res['data'];
+      });
+    } else {
+      this.handleClick();
+    }
+  }
+  handleClick() {
+    this.httpService.getApi('getAllEmployee').subscribe(res => {
+      this.userList = res['data'];
+    });
   }
 
 }
